@@ -21,7 +21,7 @@ const priceConvert = async (req, res)=>{
 
 const fetchCompaniesData = async (req, res)=>{
     const {currency} = req.body;
-    if(currency!= "bitcoin" || currency!= "ethereum"){
+    if(currency!= "bitcoin" && currency!= "ethereum"){
         return res.send({error: "Currency is required and can only have two values (bitcoin or ethereum)"})
     }
     const companies = await axios.get(`https://api.coingecko.com/api/v3/companies/public_treasury/${currency}`)
