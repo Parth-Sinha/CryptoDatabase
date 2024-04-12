@@ -2,6 +2,18 @@
 
 CryptoDB is a backend service deployed on Vercel that provides cryptocurrency-related data and functionality through API endpoints. It serves as a convenient tool for developers to access information and perform conversions between different cryptocurrencies.
 
+## Folder Structure
+- /
+    - Controllers/
+        - routeControllers.js (logics controlling endpoints)
+    - DB/
+        - connection.js
+    - models/
+        - CryptoSchema.js ( database Schema)
+    - index.js
+    - update_crypto.js (for updating the database every hour)
+
+
 ## Database Update
 
 The database of CryptoDB is automatically updated every hour with the latest list of cryptocurrencies using the CoinGecko API.
