@@ -2,11 +2,11 @@ const axios = require('axios')
 
 const priceConvert = async (req, res)=>{
     const {fromId, toId, date} = req.body;
-    if(!date){
-        return res.send({error: "Date is required"})
-    }
     if(!fromId || !toId){
         return res.send({error: "Both From and To Cryptocurrency ID is required"})
+    }
+    if(!date){
+        return res.send({error: "Date is required"})
     }
     const fromResponse = await axios.get(`https://api.coingecko.com/api/v3/coins/${fromId}/history?date=${date}`)
     const toResponse = await axios.get(`https://api.coingecko.com/api/v3/coins/${toId}/history?date=${date}`)
