@@ -28,5 +28,3 @@ app.get('/', async (req, res)=>{
 })
 app.get('/convert', routes.priceConvert)
 app.get('/companies',routes.fetchCompaniesData)
-
-// Pass : asdfghjkl1234 
