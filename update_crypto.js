@@ -11,32 +11,26 @@ async function updateCryptocurrencies() {
         const response = await axios.get(coinGeckoURL);
         const newCryptos = response.data.map(crypto => crypto.id);
         const newCryptosNames = response.data.map(crypto => crypto.name);
-        console.log(newCryptos.length, 'cryptocurrencies fetched from CoinGecko API.')
         // Fetch existing cryptocurrencies from MongoDB
         const existingCryptos = (await Crypto.find().select('crypto_id').lean()).map(crypto => crypto.crypto_id);
 
         // Check if arrays are equal
         if (arraysEqual(newCryptos, existingCryptos)) {
-            console.log("No new cryptocurrencies to insert.");
             return;
         }
 
         // Delete existing cryptocurrencies
         await Crypto.deleteMany({});
-        console.log("Deleted all the existing cryptocurrencies.");
 
         // Insert new cryptocurrencies
         const crypto_data = newCryptos.map(crypto_id => ({
             crypto_id: crypto_id,
             crypto_name: newCryptosNames[newCryptos.indexOf(crypto_id)]
         }));
-        console.log(crypto_data.length, 'new cryptocurrencies to insert.')
         await Crypto.insertMany(crypto_data);
-        console.log("Inserted all the new cryptocurrencies.");
 
-        console.log('Cryptocurrency data updated successfully.');
     } catch (error) {
-        console.error('Error updating cryptocurrency data:', error);
+        console.error('Error updating cryptocurrencies:', error);
     }
 }
 
