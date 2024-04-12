@@ -11,17 +11,17 @@ app.use(express.json())
 
 // Connect to MongoDB
 try {
-    connectDB(process.env.URI).then(()=>{
-        console.log("connected to DB...")
-        // Initial update
-        updateCryptocurrencies();
-        // Schedule the job to run every hour
-        cron.schedule('0 * * * *', async () => {
-            console.log('Updating cryptocurrency data...');
-            await updateCryptocurrencies();
-        });
-        app.listen(process.env.PORT, ()=>console.log(`Server started on PORT: ${process.env.PORT}`))
-    })
+    // connectDB(process.env.URI).then(()=>{
+    //     console.log("connected to DB...")
+    //     // Initial update
+    //     updateCryptocurrencies();
+    //     // Schedule the job to run every hour
+    //     cron.schedule('0 * * * *', async () => {
+    //         console.log('Updating cryptocurrency data...');
+    //         await updateCryptocurrencies();
+    //     });
+    // })
+    app.listen(process.env.PORT, ()=>console.log(`Server started on PORT: ${process.env.PORT}`))
     
 }catch(err){
     console.log(err)
