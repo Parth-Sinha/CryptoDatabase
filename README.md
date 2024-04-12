@@ -2,12 +2,38 @@
 
 CryptoDB is a backend service deployed on Vercel that provides cryptocurrency-related data and functionality through API endpoints. It serves as a convenient tool for developers to access information and perform conversions between different cryptocurrencies.
 
+## Folder Structure
+- /
+    - Controllers/
+        - routeControllers.js (logics controlling endpoints)
+    - DB/
+        - connection.js
+    - models/
+        - CryptoSchema.js ( database Schema)
+    - index.js
+    - update_crypto.js (for updating the database every hour)
+
+
+## Database Update
+
+The database of CryptoDB is automatically updated every hour with the latest list of cryptocurrencies using the CoinGecko API.
+
+### Update Frequency
+
+The update process fetches the list of cryptocurrencies from the following API endpoint:
+[https://api.coingecko.com/api/v3/coins/list](https://api.coingecko.com/api/v3/coins/list)
+
+The update interval is set to every hour to ensure that the database remains current with the rapidly changing landscape of cryptocurrencies.
+
+
 ## API Endpoints
 
 ### 1. `/convert`
 
 This endpoint allows users to convert cryptocurrency values from one cryptocurrency to another based on a specified date.
-Ref : https://api.coingecko.com/api/v3/coins/{id}/history
+- `Ref` : https://api.coingecko.com/api/v3/coins/{id}/history
+- `METHOD`: GET
+- `Endpoint`: https://crypto-database-rho.vercel.app/convert
 
 #### Request Format
 
@@ -26,13 +52,15 @@ Ref : https://api.coingecko.com/api/v3/coins/{id}/history
 ### 2. `/companies`
 
 This endpoint provides information about companies related to a specific cryptocurrency.
-Ref : https://api.coingecko.com/api/v3/companies/public_treasury/{id} 
+- `Ref` : https://api.coingecko.com/api/v3/companies/public_treasury/{id} 
+- `METHOD` : GET
+- `Endpoint` : https://crypto-database-rho.vercel.app/companies
 
 #### Request Format
 
 ```json
 {
-    "currency": "bitcoin"
+    "currency": "bitcoin" 
 }
 ```
 
@@ -41,6 +69,8 @@ Ref : https://api.coingecko.com/api/v3/companies/public_treasury/{id}
 ## Testing
 
 You can test the API endpoints using Postman or any other API testing tool. Simply send requests to the respective endpoints with the appropriate request format described above.
+To convert cryptocurrency values using the CryptoDB API, you can make a GET request to the mentioned endpoints.
+
 
 ## Deployment
 
